@@ -1,0 +1,77 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Intercal",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#operators"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.intercal",
+					"match": "PLEASE|CREATE|DO|N['O]?T\\S*|<-|NEXT|COME|FROM|MAYBE|$|~|v|\\?|ONCE|AGAIN|TRY|GIVE(\\s*UP)?"
+				},
+				{
+					"name": "constant.character",
+					"match": "\\((\\d{1,3}|[02-46-9]\\d{2}|\\d{5})\\)"
+				},
+				{
+					"name": "constant.character.escape",
+					"match": "\\([15]\\d{3}\\)|WRITE(\\s*OUT)?|READ(\\s*IN)"
+				},
+				{
+					"name": "constant.regexp",
+					"match": "%\\d{1,3}"
+				}
+			]
+		},
+		"grouping": {
+			"name": "string.quoted.double.intercal",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"include": "operators"
+				}
+			]
+		},
+		"grouping1": {
+			"name": "support.function",
+			"begin": "'",
+			"end": "'",
+			"patterns": [
+				{
+					"include": "operators"
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "variable.name",
+					"match": "[,.]\\d+/?"
+				},
+				{
+					"include": "#grouping"
+				},
+				{
+					"include": "#grouping1"
+				},
+				{
+					"name": "constant.character.escape",
+					"match": "[:;]\\d+|SUB"
+				},
+				{
+					"name": "constant.numeric",
+					"match": "#\\d+"
+				}
+			]
+		}
+	},
+	"scopeName": "source.intercal"
+}
